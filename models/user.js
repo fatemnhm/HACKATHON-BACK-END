@@ -11,13 +11,20 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    // Linking User to Customers if Users manage Customers
+    customers: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Customer',
+      },
+    ],
   },
   { timestamps: true }
 );
 
 userSchema.set('toJSON', {
   transform: (document, returnedObj) => {
-    delete returnedObj.hashedPassword;
+    delete returnedObj.hashedPassword; // Remove password when converting to JSON
   },
 });
 
