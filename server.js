@@ -9,6 +9,7 @@ const verifyToken = require('./middleware/verify-token');
 const testJWTRouter = require('./controllers/test-jwt');
 const usersRouter = require('./controllers/users');
 const profilesRouter = require('./controllers/profiles');
+const questionsRouter = require('./controllers/products.js')
 
 const app = express();
 app.use(cors({ origin: 'http://localhost:5173' }))
@@ -19,6 +20,7 @@ app.use(cors()); // Add this line
 // Public Routes
 app.use('/test-jwt', testJWTRouter);
 app.use('/users', usersRouter);
+app.use('/products', questionsRouter)
 
 // Protected Routes
 app.use(verifyToken);
