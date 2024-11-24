@@ -2,6 +2,11 @@ const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema(
   {
+   customer_id: {
+      type: String,
+      unique: true,
+      required: true,
+    },
     username: {
       type: String,
       unique: true,
@@ -11,20 +16,22 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    // Linking User to Customers if Users manage Customers
-    customers: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Customer',
-      },
-    ],
+    segment: {
+      type: String,
+      enum: ['Consumer', 'Corporate', 'Home Office'], 
+      required: true,
+    },
+    points: {
+      type: Number,
+      default: 0,
+    },
+   
   },
-  { timestamps: true }
 );
 
 userSchema.set('toJSON', {
   transform: (document, returnedObj) => {
-    delete returnedObj.hashedPassword; // Remove password when converting to JSON
+    delete returnedObj.hashedPassword; 
   },
 });
 

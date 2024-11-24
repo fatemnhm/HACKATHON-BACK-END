@@ -5,7 +5,6 @@ const orderSchema = new mongoose.Schema(
     order_id: {
       type: String,
       unique: true,
-      required: true,
     },
     order_date: {
       type: Date,
@@ -19,14 +18,14 @@ const orderSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
-    customer_id: {
-      type: String,
-      ref: 'Customer', // Foreign key reference
+    user_id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User', 
       required: true,
     },
     product_id: {
-      type: String,
-      ref: 'Product', // Foreign key reference
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product', 
       required: true,
     },
     sales: {
@@ -48,13 +47,8 @@ const orderSchema = new mongoose.Schema(
     postal_code: {
       type: Number,
       required: false,
-    },
-    region_id: {
-      type: Number,
-      required: false,
-    },
+    }
   },
-  { timestamps: true }
 );
 
 module.exports = mongoose.model('Order', orderSchema);
